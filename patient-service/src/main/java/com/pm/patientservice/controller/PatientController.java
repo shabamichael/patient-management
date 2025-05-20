@@ -3,6 +3,8 @@ package com.pm.patientservice.controller;
 import com.pm.patientservice.dto.PatientRequestDTO;
 import com.pm.patientservice.dto.PatientResponseDTO;
 import com.pm.patientservice.service.PatientService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/patients")
+@Tag(name="Patient", description = "Patients Management API")
 public class PatientController {
 
     private final PatientService patientService;
@@ -19,6 +22,7 @@ public class PatientController {
         this.patientService = patientService;
     }
     @GetMapping
+    @Operation(summary = "Get all patients")
     public ResponseEntity<List<PatientResponseDTO>> getAllPatients() {
         // Call the service method to get all patients
         var patients = patientService.getAllPatients();
@@ -27,6 +31,7 @@ public class PatientController {
     }
 
     @PostMapping
+    @Operation(summary = "Create a new patient")
     public ResponseEntity<PatientResponseDTO> createPatient(
             @Valid @RequestBody PatientRequestDTO patientRequestDTO) {
 
@@ -37,6 +42,7 @@ public class PatientController {
     }
 
     @PutMapping("/{patientId}")
+    @Operation(summary = "Update an existing patient")
     public ResponseEntity<PatientResponseDTO> updatePatient(
             @PathVariable("patientId") UUID patientId,
             @RequestBody PatientRequestDTO patientRequestDTO) {
@@ -48,6 +54,7 @@ public class PatientController {
     }
 
     @DeleteMapping("/{patientId}")
+    @Operation(summary = "Delete a patient")
     public ResponseEntity<Void>  deletePatient(@PathVariable("patientId") UUID patientId) {
         // Call the service method to delete the patient
         patientService.deletePatient(patientId);
