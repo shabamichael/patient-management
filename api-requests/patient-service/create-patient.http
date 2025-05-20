@@ -1,0 +1,13 @@
+### POST request to patient service
+POST http://localhost:4000/api/v1/patients
+Content-Type: application/json
+
+{
+  "name": "Michael Shaba",
+  "email": "michaelsmith@outlook.com",
+  "address": "23 Main St, Springfield, IL",
+  "dateOfBirth": "1990-05-15",
+  "registeredDate":  "2024-06-07"
+
+}
+###
